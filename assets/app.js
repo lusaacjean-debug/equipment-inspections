@@ -17,7 +17,7 @@ const CM = (() => {
   }
 
   function saveState(key, state) {
-    try { localStorage.setItem('cm:' + key, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
+    try { localStorage.setItem('cm:' + key, JSON.stringify(state)); return true; } catch (e) { return false; /* storage unavailable or quota exceeded */ }
   }
 
   function countTotals(data) {
@@ -40,6 +40,37 @@ const CM = (() => {
     let done = 0;
     Object.values(state.items || {}).forEach(v => { if (v && v.checked) done++; });
     return { done, total: itemCount, pct: itemCount ? Math.round((done / itemCount) * 100) : 0 };
+  }
+
+  // Reads an image file, downsizes it to maxDim px on the long edge, and
+  // re-encodes as JPEG at the given quality — keeps photos small enough to
+  // live safely in localStorage alongside everything else on the checklist.
+  function readAndCompressImage(file, maxDim, quality) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          let width = img.width, height = img.height;
+          if (width > height && width > maxDim) {
+            height = Math.round(height * (maxDim / width));
+            width = maxDim;
+          } else if (height >= width && height > maxDim) {
+            width = Math.round(width * (maxDim / height));
+            height = maxDim;
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.onerror = () => reject(new Error('Could not load image'));
+        img.src = e.target.result;
+      };
+      reader.onerror = () => reject(new Error('Could not read file'));
+      reader.readAsDataURL(file);
+    });
   }
 
   function el(tag, attrs = {}, children = []) {
@@ -189,6 +220,42 @@ const CM = (() => {
           saveState(key, state);
         });
         body.appendChild(note);
+
+        const photoWrap = el('div', { class: 'item-photo-wrap' });
+        function renderItemPhoto() {
+          photoWrap.innerHTML = '';
+          const curPhoto = (state.items[item.id] && state.items[item.id].photo) || '';
+          if (curPhoto) {
+            photoWrap.appendChild(el('img', { src: curPhoto, class: 'item-photo-thumb', alt: 'Photo for item ' + item.id, style: 'max-width:160px;max-height:160px;display:block;margin-top:6px;border-radius:4px;' }));
+            const removeBtn = el('button', { class: 'btn small danger', type: 'button', style: 'margin-top:4px;' }, 'Remove photo');
+            removeBtn.onclick = () => {
+              state.items[item.id] = Object.assign({}, state.items[item.id], { photo: '' });
+              saveState(key, state);
+              renderItemPhoto();
+            };
+            photoWrap.appendChild(removeBtn);
+          } else {
+            photoWrap.appendChild(el('div', { style: 'font-size:12px;color:#8b96a3;margin-top:6px;' }, '\uD83D\uDCF7 Attach photo (optional)'));
+            const fileInput = el('input', { type: 'file', accept: 'image/*', capture: 'environment' });
+            fileInput.addEventListener('change', () => {
+              const file = fileInput.files && fileInput.files[0];
+              if (!file) return;
+              readAndCompressImage(file, 800, 0.6).then(dataUrl => {
+                state.items = state.items || {};
+                state.items[item.id] = Object.assign({}, state.items[item.id], { photo: dataUrl });
+                const ok = saveState(key, state);
+                if (!ok) {
+                  state.items[item.id] = Object.assign({}, state.items[item.id], { photo: '' });
+                  alert('Storage is full \u2014 this photo could not be saved. Try removing other photos on this checklist first.');
+                }
+                renderItemPhoto();
+              }).catch(() => alert('Could not read that photo. Try a different image.'));
+            });
+            photoWrap.appendChild(fileInput);
+          }
+        }
+        renderItemPhoto();
+        body.appendChild(photoWrap);
         row.appendChild(body);
 
         const controls = el('div', { class: 'item-controls' });
@@ -232,6 +299,47 @@ const CM = (() => {
       });
       page.appendChild(block);
     });
+
+    /* ---- General inspection photos (not tied to a specific item) ---- */
+    page.appendChild(el('h2', { class: 'h-standalone' }, 'Inspection Photos'));
+    const galleryWrap = el('div', { class: 'general-photo-gallery' });
+    function renderGallery() {
+      galleryWrap.innerHTML = '';
+      state.generalPhotos = state.generalPhotos || [];
+      state.generalPhotos.forEach((photoUrl, idx) => {
+        const gItem = el('div', { class: 'general-photo-item', style: 'display:inline-block;margin:0 10px 10px 0;text-align:center;' });
+        gItem.appendChild(el('img', { src: photoUrl, class: 'general-photo-thumb', alt: 'Inspection photo ' + (idx + 1), style: 'max-width:180px;max-height:180px;display:block;border-radius:4px;' }));
+        const removeBtn = el('button', { class: 'btn small danger', type: 'button', style: 'margin-top:4px;' }, 'Remove');
+        removeBtn.onclick = () => {
+          state.generalPhotos.splice(idx, 1);
+          saveState(key, state);
+          renderGallery();
+        };
+        gItem.appendChild(removeBtn);
+        galleryWrap.appendChild(gItem);
+      });
+      const addWrap = el('div', {});
+      addWrap.appendChild(el('div', { style: 'font-size:12px;color:#8b96a3;margin:6px 0 4px;' }, '\uD83D\uDCF7 Add a general inspection photo'));
+      const addInput = el('input', { type: 'file', accept: 'image/*', capture: 'environment' });
+      addInput.addEventListener('change', () => {
+        const file = addInput.files && addInput.files[0];
+        if (!file) return;
+        readAndCompressImage(file, 900, 0.6).then(dataUrl => {
+          state.generalPhotos = state.generalPhotos || [];
+          state.generalPhotos.push(dataUrl);
+          const ok = saveState(key, state);
+          if (!ok) {
+            state.generalPhotos.pop();
+            alert('Storage is full \u2014 this photo could not be saved. Try removing other photos first.');
+          }
+          renderGallery();
+        }).catch(() => alert('Could not read that photo. Try a different image.'));
+      });
+      addWrap.appendChild(addInput);
+      galleryWrap.appendChild(addWrap);
+    }
+    renderGallery();
+    page.appendChild(galleryWrap);
 
     /* ---- Data tables (condition summary, thickness readings, etc.) ---- */
     function buildTable(tableDef, stateBucketName) {
@@ -317,10 +425,14 @@ const CM = (() => {
       if (v) lines.push(f.label + ': ' + v);
     });
     lines.push('');
+    if (state.generalPhotos && state.generalPhotos.length) {
+      lines.push('General inspection photos attached: ' + state.generalPhotos.length + ' (see Print / Save PDF for images)');
+      lines.push('');
+    }
     data.sections.forEach(s => {
       const flaggedOrNoted = s.items.filter(it => {
         const st = state.items && state.items[it.id];
-        return st && (st.flagged || st.status === 'Fail' || (st.note && st.note.trim()));
+        return st && (st.flagged || st.status === 'Fail' || (st.note && st.note.trim()) || st.photo);
       });
       if (flaggedOrNoted.length) {
         lines.push('== ' + s.title + ' ==');
@@ -332,6 +444,7 @@ const CM = (() => {
           const prefix = tags.length ? '[' + tags.join('/') + '] ' : '';
           lines.push(prefix + it.id + ' ' + it.text);
           if (st.note && st.note.trim()) lines.push('    Note: ' + st.note.trim());
+          if (st.photo) lines.push('    Photo attached (see Print / Save PDF for image)');
         });
         lines.push('');
       }
