@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grease Pot Inspection — Condition Monitoring</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span class="mark">CM—INSPECT</span><span class="sub">Condition Monitoring</span></div>
+      <nav class="topnav">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#static">Static Equipment</a>
+        <a href="../rotating-equipment/index.html">Rotating Equipment</a>
+        <a href="../lube-team/index.html" class="active">Lube Team</a>
+      </nav>
+    </div>
+  </div>
+
+  <div id="app"></div>
+
+  <div class="page-wrap">
+    <h2 class="h-standalone">Approved Grease Reference</h2>
+    <table class="summary-table">
+      <tr><th>Grease Name</th><th>Application</th></tr>
+      <tr><td>SHELL GADUS S2 V220 2</td><td>Motors, pumps, fans</td></tr>
+      <tr><td>EP2 GREASE</td><td>Gearboxes, crushers, bearings</td></tr>
+      <tr><td>ENERGOL GREASE LS</td><td>Compressors, high-speed bearings</td></tr>
+      <tr><td>CASTROL GRIPPA XHD 900</td><td>Heavy-duty open gears</td></tr>
+      <tr><td>MOBILUX EP3</td><td>Gear couplings, bushings</td></tr>
+      <tr><td>ENERGREASE LS EP2</td><td>Pumps, agitators, conveyors</td></tr>
+    </table>
+    <p style="color:var(--text-faint);font-family:var(--font-mono);font-size:0.72rem;margin-top:14px;">Condition ratings: Good — fully functional · Fair — minor wear, monitor closely · Poor — significant wear, schedule maintenance · Critical — immediate replacement/repair required.</p>
+  </div>
+
+  <footer>
+    <div class="wrap">CM—INSPECT / Lube Team / Grease Pot Inspection · Entries are saved automatically in this browser.</div>
+  </footer>
+
+  <script src="../assets/checklists/grease-pot-inspection-data.js"></script>
+  <script src="../assets/app.js"></script>
+  <script>CM.render(window.CHECKLIST_DATA);</script>
+</body>
+</html>
