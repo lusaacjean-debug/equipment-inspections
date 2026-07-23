@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linear Screen — Condition Monitoring</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span class="mark">CM—INSPECT</span><span class="sub">Condition Monitoring</span></div>
+      <nav class="topnav">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#static">Static Equipment</a>
+        <a href="../rotating-equipment/index.html" class="active">Rotating Equipment</a>
+        <a href="../lube-team/index.html">Lube Team</a>
+      </nav>
+    </div>
+  </div>
+
+  <div id="app"></div>
+
+  <footer>
+    <div class="wrap">CM—INSPECT / Rotating Equipment / Linear Screen · Entries are saved automatically in this browser.</div>
+  </footer>
+
+  <script src="../assets/checklists/linear-screen-data.js"></script>
+  <script src="../assets/app.js"></script>
+  <script>CM.render(window.CHECKLIST_DATA);</script>
+</body>
+</html>

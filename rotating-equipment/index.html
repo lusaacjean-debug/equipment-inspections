@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rotating Equipment \u2014 Condition Monitoring</title>
+<title>Rotating Equipment — Condition Monitoring</title>
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="brand"><span class="mark">CM\u2014INSPECT</span><span class="sub">Condition Monitoring</span></div>
+      <div class="brand"><span class="mark">CM—INSPECT</span><span class="sub">Condition Monitoring</span></div>
       <nav class="topnav">
         <a href="../index.html">Home</a>
         <a href="../index.html#static">Static Equipment</a>
@@ -20,54 +20,100 @@
   </div>
 
   <div class="page-wrap" style="padding-top:48px;">
-    <div class="eyebrow" style="font-family:var(--font-mono);color:var(--amber);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;">Rotating Equipment</div>
-    <h1 style="font-family:var(--font-display);font-weight:600;font-size:2rem;margin:0 0 12px;">No checklists here yet</h1>
-    <p style="color:var(--text-muted);max-width:60ch;">This category is set up and ready \u2014 it just doesn't have any checklists in it yet. Rotating equipment (pumps, compressors, motors, fans, gearboxes, conveyor drives) needs different check points than static equipment: vibration, alignment, bearing temperature, lubrication, and coupling condition rather than corrosion and thickness.</p>
+    <div class="eyebrow" style="font-family:var(--font-mono);color:var(--accent);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;">Rotating Equipment</div>
+    <h1 style="font-family:var(--font-display);font-weight:600;font-size:2rem;margin:0 0 12px;">11 checklists live</h1>
+    <p style="color:var(--text-muted);max-width:60ch;">Conveyors, screens, mills, agitators, and pumps. Each checklist follows that machine's own drive train — Safety, Motor, Coupling, Gearbox, and driven component — matching the site's Lotus Engineering condition-monitoring check sheets.</p>
 
-    <div class="empty-state">
-      <h3>Add your first rotating equipment checklist</h3>
-      <p>Each checklist is just two files: a data file listing the sections/items, and a thin HTML page that loads it. Copy the pattern from the static equipment checklists:</p>
-      <code>assets/checklists/pump-centrifugal-data.js&#10;rotating-equipment/pump-centrifugal.html</code>
-      <p style="margin-top:16px;">In the data file, set a unique <code style="display:inline;padding:1px 6px;">storageKey</code> and list your sections/items \u2014 the shared engine (<code style="display:inline;padding:1px 6px;">assets/app.js</code>) handles checking off items, notes, flags, progress, the summary table, sign-off, printing, and saving automatically. Then add a card for it on the home page and a link here.</p>
+    <div class="card-grid" style="margin-top:22px;">
+        <a class="sheet-card" href="general-conveyor.html" style="text-decoration:none;color:inherit;">
+          <div class="sheet-no">SHEET 1 OF 11 · CM-CONV-GEN-001</div>
+          <h3>General Conveyor</h3>
+          <p>Motor, fluid coupling, gearbox, grid coupling, head/snub/tail pulley, bend pulley.</p>
+          <div class="progress-track"><div class="progress-fill" id="pf-general-conveyor"></div></div>
+          <div class="meta-row"><span id="pl-general-conveyor">0 / 25 checks</span><span class="open-link">Open →</span></div>
+        </a>
+        <a class="sheet-card" href="linear-screen.html" style="text-decoration:none;color:inherit;">
+          <div class="sheet-no">SHEET 2 OF 11 · CM-SCREEN-LIN-001</div>
+          <h3>Linear Screen</h3>
+          <p>Motor, belt coupling, gearbox, head pulley, screen panel, pillow block bearings.</p>
+          <div class="progress-track"><div class="progress-fill" id="pf-linear-screen"></div></div>
+          <div class="meta-row"><span id="pl-linear-screen">0 / 27 checks</span><span class="open-link">Open →</span></div>
+        </a>
+        <a class="sheet-card" href="magnetic-conveyor.html" style="text-decoration:none;color:inherit;">
+          <div class="sheet-no">SHEET 3 OF 11 · CM-CONV-MAG-001</div>
+          <h3>Magnetic Conveyor</h3>
+          <p>Motor, V-belt coupling, gearbox, head/tail pulley.</p>
+          <div class="progress-track"><div class="progress-fill" id="pf-magnetic-conveyor"></div></div>
+          <div class="meta-row"><span id="pl-magnetic-conveyor">0 / 18 checks</span><span class="open-link">Open →</span></div>
+        </a>
+        <a class="sheet-card" href="mineral-sizer.html" style="text-decoration:none;color:inherit;">
+          <div class="sheet-no">SHEET 4 OF 11 · CM-SIZER-001</div>
+          <h3>Mineral Sizer</h3>
+          <p>Motor, Voith coupling, sizer mill, lube oil distribution, external gear pump.</p>
+          <div class="progress-track"><div class="progress-fill" id="pf-mineral-sizer"></div></div>
+          <div class="meta-row"><span id="pl-mineral-sizer">0 / 25 checks</span><span class="open-link">Open →</span></div>
+        </a>
+        <a class="sheet-card" href="mix-tank-agitator.html" style="text-decoration:none;color:inherit;">
+          <div class="sheet-no">SHEET 5 OF 11 · CM-AGIT-MIX-001</div>
+          <h3>Mix Tank Agitator</h3>
+          <p>Motor, jaw coupling, gearbox, agitator shaft.</p>
+          <div class="progress-track"><div class="progress-fill" id="pf-mix-tank-agitator"></div></div>
+          <div class="meta-row"><span id="pl-mix-tank-agitator">0 / 23 checks</span><span class="open-link">Open →</span></div>
+        </a>
+        <a class="sheet-card" href="neutralization-tank-agitator.html" style="text-decoration:none;color:inherit;">
+          <div class="sheet-no">SHEET 6 OF 11 · CM-AGIT-NEUT-001</div>
+          <h3>Neutralization Tank Agitator</h3>
+          <p>Motor, jaw coupling, gearbox, agitator shaft, tank seal/level.</p>
+          <div class="progress-track"><div class="progress-fill" id="pf-neutralization-tank-agitator"></div></div>
+          <div class="meta-row"><span id="pl-neutralization-tank-agitator">0 / 21 checks</span><span class="open-link">Open →</span></div>
+        </a>
+        <a class="sheet-card" href="sag-mill.html" style="text-decoration:none;color:inherit;">
+          <div class="sheet-no">SHEET 7 OF 11 · CM-MILL-SAG-001</div>
+          <h3>SAG / Ball Mill</h3>
+          <p>Motors M1/M2, couplings, gearboxes, pinion & bull gear, trunnions, lube cooling, auxiliary pumps.</p>
+          <div class="progress-track"><div class="progress-fill" id="pf-sag-mill"></div></div>
+          <div class="meta-row"><span id="pl-sag-mill">0 / 57 checks</span><span class="open-link">Open →</span></div>
+        </a>
+        <a class="sheet-card" href="thickener-drive.html" style="text-decoration:none;color:inherit;">
+          <div class="sheet-no">SHEET 8 OF 11 · CM-THICK-DRIVE-001</div>
+          <h3>Thickener Hydraulic Power Pack</h3>
+          <p>Reservoir, hydraulic drive unit, rake lift supply, motor, planetary gear reducer, hydraulic cylinder.</p>
+          <div class="progress-track"><div class="progress-fill" id="pf-thickener-drive"></div></div>
+          <div class="meta-row"><span id="pl-thickener-drive">0 / 46 checks</span><span class="open-link">Open →</span></div>
+        </a>
+        <a class="sheet-card" href="vbelt-drive-pump.html" style="text-decoration:none;color:inherit;">
+          <div class="sheet-no">SHEET 9 OF 11 · CM-PUMP-VBELT-001</div>
+          <h3>V-Belt Drive Pump</h3>
+          <p>Motor, V-belt drive, centrifugal pump.</p>
+          <div class="progress-track"><div class="progress-fill" id="pf-vbelt-drive-pump"></div></div>
+          <div class="meta-row"><span id="pl-vbelt-drive-pump">0 / 22 checks</span><span class="open-link">Open →</span></div>
+        </a>
+        <a class="sheet-card" href="vertical-pump.html" style="text-decoration:none;color:inherit;">
+          <div class="sheet-no">SHEET 10 OF 11 · CM-PUMP-VERT-001</div>
+          <h3>Vertical Pump</h3>
+          <p>Motor, coupling, centrifugal pump.</p>
+          <div class="progress-track"><div class="progress-fill" id="pf-vertical-pump"></div></div>
+          <div class="meta-row"><span id="pl-vertical-pump">0 / 16 checks</span><span class="open-link">Open →</span></div>
+        </a>
+        <a class="sheet-card" href="yard-conveyor.html" style="text-decoration:none;color:inherit;">
+          <div class="sheet-no">SHEET 11 OF 11 · CM-CONV-YARD-001</div>
+          <h3>Yard Conveyor Belt</h3>
+          <p>Motor, couplings, gearbox, head/snub/tail pulley, bend/counterweight/take-up pulley.</p>
+          <div class="progress-track"><div class="progress-fill" id="pf-yard-conveyor"></div></div>
+          <div class="meta-row"><span id="pl-yard-conveyor">0 / 26 checks</span><span class="open-link">Open →</span></div>
+        </a>
     </div>
 
-    <h2 class="h-standalone">Typical checklists to add</h2>
-    <div class="card-grid">
-      <div class="sheet-card placeholder-card">
-        <div class="sheet-no">SUGGESTED</div>
-        <h3>Centrifugal Pump Inspection</h3>
-        <p>Alignment, seal/packing condition, bearing temperature &amp; vibration, coupling guard, lubrication, suction/discharge pressure trends.</p>
-      </div>
-      <div class="sheet-card placeholder-card">
-        <div class="sheet-no">SUGGESTED</div>
-        <h3>Electric Motor Inspection</h3>
-        <p>Insulation resistance, winding temperature, bearing condition, vibration signature, terminal box integrity, cooling fan/airflow.</p>
-      </div>
-      <div class="sheet-card placeholder-card">
-        <div class="sheet-no">SUGGESTED</div>
-        <h3>Gearbox &amp; Coupling Inspection</h3>
-        <p>Oil condition/analysis, gear mesh noise, seal leakage, coupling alignment, mounting bolt torque, guard condition.</p>
-      </div>
-      <div class="sheet-card placeholder-card">
-        <div class="sheet-no">SUGGESTED</div>
-        <h3>Compressor Inspection</h3>
-        <p>Valve condition, cylinder/rotor clearances, cooling system, safety relief valves, vibration &amp; thermal trending.</p>
-      </div>
-      <div class="sheet-card placeholder-card">
-        <div class="sheet-no">SUGGESTED</div>
-        <h3>Fan &amp; Blower Inspection</h3>
-        <p>Impeller/blade condition, bearing housing, belt/drive tension, guarding, vibration, ductwork connections.</p>
-      </div>
-      <div class="sheet-card placeholder-card">
-        <div class="sheet-no">SUGGESTED</div>
-        <h3>Conveyor Drive Inspection</h3>
-        <p>Drive pulley/lagging condition, brake system, gearbox, motor, belt tracking and tension, guarding.</p>
-      </div>
+    <div class="empty-state">
+      <h3>Add another rotating equipment checklist</h3>
+      <p>Each checklist is just two files: a data file listing the sections/items, and a thin HTML page that loads it. Copy the pattern from any checklist above:</p>
+      <code>assets/checklists/&lt;name&gt;-data.js&#10;rotating-equipment/&lt;name&gt;.html</code>
+      <p style="margin-top:16px;">In the data file, set a unique <code style="display:inline;padding:1px 6px;">storageKey</code> and list your sections/items — the shared engine (<code style="display:inline;padding:1px 6px;">assets/app.js</code>) handles checking off items, notes, flags, progress, the summary table, sign-off, printing, and saving automatically. Then add a card for it on the home page and here.</p>
     </div>
   </div>
 
   <footer>
-    <div class="wrap">CM\u2014INSPECT / Rotating Equipment</div>
+    <div class="wrap">CM—INSPECT / Rotating Equipment</div>
   </footer>
 </body>
 </html>
