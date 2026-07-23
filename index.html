@@ -1,116 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Condition Monitoring — Equipment Inspection System</title>
-<meta name="description" content="Digital inspection checklists for static and rotating equipment condition monitoring.">
-<link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
-  <div class="topbar">
-    <div class="topbar-inner">
-      <div class="brand"><span class="mark">CM—INSPECT</span><span class="sub">Condition Monitoring</span></div>
-      <nav class="topnav">
-        <a href="index.html" class="active">Home</a>
-        <a href="#static">Static Equipment</a>
-        <a href="#rotating">Rotating Equipment</a>
-        <a href="#lube">Lube Team</a>
-      </nav>
-    </div>
-  </div>
+CM—INSPECTCondition Monitoring
+Home Static Equipment Rotating Equipment Lube Team
+Condition Monitoring · Equipment Inspection System
+Field-ready inspection checklists, by equipment class
+Digital versions of the site's equipment checklists — static, rotating, and lubrication — built on API 653, API 575, EEMUA 159, AS 1940, AS/NZS 4100, ISO 55000 and ICML 55. Check items off, log observations, flag findings, and print or export a record on the spot.
 
-  <div class="wrap">
-    <div class="hero">
-      <div class="eyebrow">Condition Monitoring · Equipment Inspection System</div>
-      <h1>Field-ready inspection checklists, by equipment class</h1>
-      <p>Digital versions of the site's static equipment checklists — tank external, tank internal, and structural — built on API 653, API 575, EEMUA 159, AS 1940 and AS/NZS&nbsp;4100. Check items off, log observations, flag findings, and print or export a record on the spot. Rotating Equipment and Lube Team are scaffolded and ready for their first checklists.</p>
-      <div class="hero-stats">
-        <div class="hero-stat"><div class="n">3</div><div class="l">Checklists live</div></div>
-        <div class="hero-stat"><div class="n">208</div><div class="l">Check points</div></div>
-        <div class="hero-stat"><div class="n">3</div><div class="l">Team categories</div></div>
-      </div>
-    </div>
+18
+Checklists live
+724
+Check points
+3
+Team categories
+Static Equipment Live
+Tanks, vessels, and structural steel — assets that don't move. Inspected for corrosion, thickness loss, foundation movement, and structural integrity.
+CM-TANK-EXT-001
+Tank External Inspection
+Foundation, shell, roof, appurtenances, containment & bund — above-ground storage tanks, external condition.
 
-    <div class="category" id="static">
-      <div class="category-head">
-        <h2>Static Equipment <span class="tag static">Live</span></h2>
-      </div>
-      <div class="category-desc">Tanks, vessels, and structural steel — assets that don't move. Inspected for corrosion, thickness loss, foundation movement, and structural integrity.</div>
-      <div class="card-grid">
-        <a class="sheet-card" href="static-equipment/tank-external.html" style="text-decoration:none;color:inherit;">
-          <div class="sheet-no">SHEET 1 OF 3 · CM-TANK-EXT-001</div>
-          <h3>Tank External Inspection</h3>
-          <p>Foundation, shell, roof, appurtenances, containment &amp; bund — above-ground storage tanks, external condition.</p>
-          <div class="progress-track"><div class="progress-fill" id="pf-tank-external"></div></div>
-          <div class="meta-row"><span id="pl-tank-external">0 / 67 checks</span><span class="open-link">Open →</span></div>
-        </a>
-        <a class="sheet-card" href="static-equipment/tank-internal.html" style="text-decoration:none;color:inherit;">
-          <div class="sheet-no">SHEET 2 OF 3 · CM-TANK-INT-001</div>
-          <h3>Tank Internal Inspection</h3>
-          <p>Confined space entry, bottom plate, shell, internal structures, NDT &amp; thickness mapping.</p>
-          <div class="progress-track"><div class="progress-fill" id="pf-tank-internal"></div></div>
-          <div class="meta-row"><span id="pl-tank-internal">0 / 72 checks</span><span class="open-link">Open →</span></div>
-        </a>
-        <a class="sheet-card" href="static-equipment/structural.html" style="text-decoration:none;color:inherit;">
-          <div class="sheet-no">SHEET 3 OF 3 · CM-STRUCT-INSP-001</div>
-          <h3>Structural Inspection</h3>
-          <p>Foundations, steel members, connections, corrosion/coatings, platforms &amp; special structures.</p>
-          <div class="progress-track"><div class="progress-fill" id="pf-structural"></div></div>
-          <div class="meta-row"><span id="pl-structural">0 / 69 checks</span><span class="open-link">Open →</span></div>
-        </a>
-      </div>
-    </div>
+0 / 67 checksOpen →
+CM-TANK-INT-001
+Tank Internal Inspection
+Confined space entry, bottom plate, shell, internal structures, NDT & thickness mapping.
 
-    <div class="category" id="rotating">
-      <div class="category-head">
-        <h2>Rotating Equipment <span class="tag rotating">Scaffolded</span></h2>
-      </div>
-      <div class="category-desc">Pumps, motors, compressors, gearboxes, fans, conveyor drives — assets with moving parts. Different failure modes call for different checks: vibration, alignment, bearing temperature, lubrication.</div>
-      <div class="card-grid">
-        <a class="sheet-card placeholder-card" href="rotating-equipment/index.html" style="text-decoration:none;color:inherit;">
-          <div class="sheet-no">GET STARTED</div>
-          <h3>Add your first checklist</h3>
-          <p>The category page has the pattern for adding pump, motor, gearbox, compressor, fan, and conveyor drive checklists.</p>
-          <div class="meta-row"><span>0 checklists yet</span><span class="open-link">Open →</span></div>
-        </a>
-      </div>
-    </div>
+0 / 72 checksOpen →
+CM-STRUCT-INSP-001
+Structural Inspection
+Foundations, steel members, connections, corrosion/coatings, platforms & special structures.
 
-    <div class="category" id="lube">
-      <div class="category-head">
-        <h2>Lube Team <span class="tag lube">Scaffolded</span></h2>
-      </div>
-      <div class="category-desc">Lubrication rounds and consumable-based routine work — oil sampling, greasing, top-ups, filter changes, and lube storage. Tracked per route and per asset rather than per component condition.</div>
-      <div class="card-grid">
-        <a class="sheet-card placeholder-card" href="lube-team/index.html" style="text-decoration:none;color:inherit;">
-          <div class="sheet-no">GET STARTED</div>
-          <h3>Add your first checklist</h3>
-          <p>The category page has the pattern for adding oil sampling, grease route, top-up, filter change, and lube storage checklists.</p>
-          <div class="meta-row"><span>0 checklists yet</span><span class="open-link">Open →</span></div>
-        </a>
-      </div>
-    </div>
-  </div>
+0 / 69 checksOpen →
+Rotating Equipment Live
+Pumps, motors, compressors, gearboxes, mills, and conveyor drives — assets with moving parts. Checked for vibration, alignment, bearing temperature, coupling condition, and lubrication.
+CM-CONV-GEN-001
+General Conveyor
+Motor, fluid coupling, gearbox, grid coupling, head/snub/tail pulley, bend pulley.
 
-  <footer>
-    <div class="wrap">CM—INSPECT · Condition Monitoring Equipment Inspection System · All entries save automatically in this browser, per device.</div>
-  </footer>
+0 / 25 checksOpen →
+CM-SCREEN-LIN-001
+Linear Screen
+Motor, belt coupling, gearbox, head pulley, screen panel, pillow block bearings.
 
-  <script src="assets/app.js"></script>
-  <script>
-    const cards = [
-      { key: 'tank-external', total: 67 },
-      { key: 'tank-internal', total: 72 },
-      { key: 'structural', total: 69 }
-    ];
-    cards.forEach(c => {
-      const s = CM.summarizeForCard(c.key, c.total);
-      const fill = document.getElementById('pf-' + c.key);
-      const label = document.getElementById('pl-' + c.key);
-      if (fill) fill.style.width = s.pct + '%';
-      if (label) label.textContent = s.done + ' / ' + s.total + ' checks (' + s.pct + '%)';
-    });
-  </script>
-</body>
-</html>
+0 / 27 checksOpen →
+CM-CONV-MAG-001
+Magnetic Conveyor
+Motor, V-belt coupling, gearbox, head/tail pulley.
+
+0 / 18 checksOpen →
+CM-SIZER-001
+Mineral Sizer
+Motor, Voith coupling, sizer mill, lube oil distribution, external gear pump.
+
+0 / 25 checksOpen →
+CM-AGIT-MIX-001
+Mix Tank Agitator
+Motor, jaw coupling, gearbox, agitator shaft.
+
+0 / 23 checksOpen →
+CM-AGIT-NEUT-001
+Neutralization Tank Agitator
+Motor, jaw coupling, gearbox, agitator shaft, tank seal/level.
+
+0 / 21 checksOpen →
+CM-MILL-SAG-001
+SAG / Ball Mill
+Motors M1/M2, couplings, gearboxes, pinion & bull gear, trunnions, lube cooling, auxiliary pumps.
+
+0 / 57 checksOpen →
+CM-THICK-DRIVE-001
+Thickener Hydraulic Power Pack
+Reservoir, hydraulic drive unit, rake lift supply, motor, planetary gear reducer, hydraulic cylinder.
+
+0 / 46 checksOpen →
+CM-PUMP-VBELT-001
+V-Belt Drive Pump
+Motor, V-belt drive, centrifugal pump.
+
+0 / 22 checksOpen →
+CM-PUMP-VERT-001
+Vertical Pump
+Motor, coupling, centrifugal pump.
+
+0 / 16 checksOpen →
+CM-CONV-YARD-001
+Yard Conveyor Belt
+Motor, couplings, gearbox, head/snub/tail pulley, bend/counterweight/take-up pulley.
+
+0 / 26 checksOpen →
+Lube Team Live
+Lubrication rounds and consumable-based routine work — oil sampling, greasing, top-ups, and filter changes. Tracked per route and per asset rather than per component condition.
+CM-OIL-SAMP-001
+Oil Sampling
+Flushing, collection, field screening, labelling, chain of custody, lab submission.
+
+0 / 90 checksOpen →
+ORC-CM-001
+Oil Replacement
+Drain, filter change, refill, post-service startup verification, documentation.
+
+0 / 79 checksOpen →
+LUB-GREASE-RT-001
+Greasing Routine
+Route-based greasing with frequency legend, condition rating, and point log.
+
+0 / 27 checksOpen →
+LUB-CHK-001
+Grease Pot Inspection
+Automatic grease lubricator (grease pot) condition and discharge checks.
+
+0 / 14 checksOpen →
+CM—INSPECT · Condition Monitoring Equipment Inspection System · All entries save automatically in this browser, per device.
