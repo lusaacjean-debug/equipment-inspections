@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rotating Equipment \u2014 Condition Monitoring</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span class="mark">CM\u2014INSPECT</span><span class="sub">Condition Monitoring</span></div>
+      <nav class="topnav">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#static">Static Equipment</a>
+        <a href="index.html" class="active">Rotating Equipment</a>
+        <a href="../lube-team/index.html">Lube Team</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="page-wrap" style="padding-top:48px;">
+    <div class="eyebrow" style="font-family:var(--font-mono);color:var(--amber);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;">Rotating Equipment</div>
+    <h1 style="font-family:var(--font-display);font-weight:600;font-size:2rem;margin:0 0 12px;">No checklists here yet</h1>
+    <p style="color:var(--text-muted);max-width:60ch;">This category is set up and ready \u2014 it just doesn't have any checklists in it yet. Rotating equipment (pumps, compressors, motors, fans, gearboxes, conveyor drives) needs different check points than static equipment: vibration, alignment, bearing temperature, lubrication, and coupling condition rather than corrosion and thickness.</p>
+
+    <div class="empty-state">
+      <h3>Add your first rotating equipment checklist</h3>
+      <p>Each checklist is just two files: a data file listing the sections/items, and a thin HTML page that loads it. Copy the pattern from the static equipment checklists:</p>
+      <code>assets/checklists/pump-centrifugal-data.js&#10;rotating-equipment/pump-centrifugal.html</code>
+      <p style="margin-top:16px;">In the data file, set a unique <code style="display:inline;padding:1px 6px;">storageKey</code> and list your sections/items \u2014 the shared engine (<code style="display:inline;padding:1px 6px;">assets/app.js</code>) handles checking off items, notes, flags, progress, the summary table, sign-off, printing, and saving automatically. Then add a card for it on the home page and a link here.</p>
+    </div>
+
+    <h2 class="h-standalone">Typical checklists to add</h2>
+    <div class="card-grid">
+      <div class="sheet-card placeholder-card">
+        <div class="sheet-no">SUGGESTED</div>
+        <h3>Centrifugal Pump Inspection</h3>
+        <p>Alignment, seal/packing condition, bearing temperature &amp; vibration, coupling guard, lubrication, suction/discharge pressure trends.</p>
+      </div>
+      <div class="sheet-card placeholder-card">
+        <div class="sheet-no">SUGGESTED</div>
+        <h3>Electric Motor Inspection</h3>
+        <p>Insulation resistance, winding temperature, bearing condition, vibration signature, terminal box integrity, cooling fan/airflow.</p>
+      </div>
+      <div class="sheet-card placeholder-card">
+        <div class="sheet-no">SUGGESTED</div>
+        <h3>Gearbox &amp; Coupling Inspection</h3>
+        <p>Oil condition/analysis, gear mesh noise, seal leakage, coupling alignment, mounting bolt torque, guard condition.</p>
+      </div>
+      <div class="sheet-card placeholder-card">
+        <div class="sheet-no">SUGGESTED</div>
+        <h3>Compressor Inspection</h3>
+        <p>Valve condition, cylinder/rotor clearances, cooling system, safety relief valves, vibration &amp; thermal trending.</p>
+      </div>
+      <div class="sheet-card placeholder-card">
+        <div class="sheet-no">SUGGESTED</div>
+        <h3>Fan &amp; Blower Inspection</h3>
+        <p>Impeller/blade condition, bearing housing, belt/drive tension, guarding, vibration, ductwork connections.</p>
+      </div>
+      <div class="sheet-card placeholder-card">
+        <div class="sheet-no">SUGGESTED</div>
+        <h3>Conveyor Drive Inspection</h3>
+        <p>Drive pulley/lagging condition, brake system, gearbox, motor, belt tracking and tension, guarding.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">CM\u2014INSPECT / Rotating Equipment</div>
+  </footer>
+</body>
+</html>

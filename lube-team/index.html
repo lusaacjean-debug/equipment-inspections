@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lube Team \u2014 Condition Monitoring</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span class="mark">CM\u2014INSPECT</span><span class="sub">Condition Monitoring</span></div>
+      <nav class="topnav">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#static">Static Equipment</a>
+        <a href="../rotating-equipment/index.html">Rotating Equipment</a>
+        <a href="index.html" class="active">Lube Team</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="page-wrap" style="padding-top:48px;">
+    <div class="eyebrow" style="font-family:var(--font-mono);color:var(--green);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;">Lube Team</div>
+    <h1 style="font-family:var(--font-display);font-weight:600;font-size:2rem;margin:0 0 12px;">No checklists here yet</h1>
+    <p style="color:var(--text-muted);max-width:60ch;">This category is set up and ready \u2014 it just doesn't have any checklists in it yet. Lubrication work is route-based and consumable-based rather than component-based: oil grades, sample points, grease intervals, and top-up volumes, tracked per route or per asset rather than per inspection.</p>
+
+    <div class="empty-state">
+      <h3>Add your first lube team checklist</h3>
+      <p>Each checklist is just two files: a data file listing the sections/items, and a thin HTML page that loads it. Copy the pattern from the static equipment checklists:</p>
+      <code>assets/checklists/lube-route-A-data.js&#10;lube-team/lube-route-A.html</code>
+      <p style="margin-top:16px;">In the data file, set a unique <code style="display:inline;padding:1px 6px;">storageKey</code> and list your sections/items \u2014 the shared engine (<code style="display:inline;padding:1px 6px;">assets/app.js</code>) handles checking off items, notes, flags, progress, the summary table, sign-off, printing, and saving automatically. Then add a card for it on the home page and a link here.</p>
+    </div>
+
+    <h2 class="h-standalone">Typical checklists to add</h2>
+    <div class="card-grid">
+      <div class="sheet-card placeholder-card">
+        <div class="sheet-no">SUGGESTED</div>
+        <h3>Oil Sampling Round</h3>
+        <p>Sample point ID, oil grade/grade change verification, sample bottle labelling, lab submission log, contamination/water check.</p>
+      </div>
+      <div class="sheet-card placeholder-card">
+        <div class="sheet-no">SUGGESTED</div>
+        <h3>Grease Lubrication Route</h3>
+        <p>Grease points by asset, grease type, quantity dispensed, interval compliance, purge/relief valve check, over-greasing check.</p>
+      </div>
+      <div class="sheet-card placeholder-card">
+        <div class="sheet-no">SUGGESTED</div>
+        <h3>Oil Top-Up &amp; Level Check</h3>
+        <p>Sight glass/dipstick level, top-up volume logged, correct oil grade confirmed, leak check at seals and breathers.</p>
+      </div>
+      <div class="sheet-card placeholder-card">
+        <div class="sheet-no">SUGGESTED</div>
+        <h3>Filter &amp; Breather Change</h3>
+        <p>Filter change interval tracking, differential pressure check, breather desiccant condition, old filter inspection for debris.</p>
+      </div>
+      <div class="sheet-card placeholder-card">
+        <div class="sheet-no">SUGGESTED</div>
+        <h3>Lube Storage &amp; Handling</h3>
+        <p>Storage area cleanliness, container labelling and segregation by grade, dispensing equipment condition, spill containment.</p>
+      </div>
+      <div class="sheet-card placeholder-card">
+        <div class="sheet-no">SUGGESTED</div>
+        <h3>Oil Analysis Trend Review</h3>
+        <p>Lab report review against alarm limits, wear metal trending, viscosity/TAN checks, follow-up action tracking.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">CM\u2014INSPECT / Lube Team</div>
+  </footer>
+</body>
+</html>
