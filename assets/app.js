@@ -69,7 +69,24 @@ const CM = (() => {
     track.appendChild(fill);
     const label = el('div', { class: 'progress-label' });
     const printBtn = el('button', { class: 'btn' }, 'Print / Save PDF');
-    printBtn.onclick = () => window.print();
+    printBtn.onclick = () => {
+      // Empty textareas visually show their placeholder text, and window.print()
+      // captures whatever is visually rendered — so blank notes were printing
+      // "Notes / observations…" as if it were real content. Clear placeholders
+      // on empty fields just before printing, then restore them after.
+      const emptyNotes = Array.from(document.querySelectorAll('.item-body textarea'))
+        .filter(t => !t.value.trim());
+      const originalPlaceholders = emptyNotes.map(t => t.placeholder);
+      emptyNotes.forEach(t => { t.placeholder = ''; });
+      const restore = () => {
+        emptyNotes.forEach((t, i) => { t.placeholder = originalPlaceholders[i]; });
+        window.removeEventListener('afterprint', restore);
+      };
+      window.addEventListener('afterprint', restore);
+      window.print();
+      // Fallback restore in case afterprint doesn't fire (some browsers/print-to-PDF flows)
+      setTimeout(restore, 2000);
+    };
     const exportBtn = el('button', { class: 'btn' }, 'Export findings');
     exportBtn.onclick = () => exportFindings(data, state);
     const resetBtn = el('button', { class: 'btn danger' }, 'Reset');
@@ -138,12 +155,32 @@ const CM = (() => {
       block.appendChild(head);
 
       section.items.forEach(item => {
-        const st = (state.items && state.items[item.id]) || { checked: false, flagged: false, note: '' };
+        const st = (state.items && state.items[item.id]) || { checked: false, flagged: false, note: '', status: '' };
         const row = el('div', { class: 'item' + (st.checked ? ' checked' : '') });
         row.appendChild(el('div', { class: 'step' }, item.id));
 
         const body = el('div', { class: 'item-body' });
         body.appendChild(el('div', { class: 'item-text' }, item.text));
+        const statusLabel = el('div', { class: 'status-label', style: 'display:none;font-weight:600;margin-top:4px;' });
+        body.appendChild(statusLabel);
+        function updateStatusLabel(status) {
+          if (status === 'Fail') {
+            statusLabel.textContent = '\u2717 FAIL';
+            statusLabel.setAttribute('style', 'display:block;font-weight:600;margin-top:4px;color:#d65c4f;');
+          } else if (status === 'Pass') {
+            statusLabel.textContent = '\u2713 PASS';
+            statusLabel.setAttribute('style', 'display:block;font-weight:600;margin-top:4px;color:#5cb88a;');
+          } else if (status === 'N/A') {
+            statusLabel.textContent = 'N/A';
+            statusLabel.setAttribute('style', 'display:block;font-weight:600;margin-top:4px;color:#8b96a3;');
+          } else {
+            statusLabel.setAttribute('style', 'display:none;');
+          }
+        }
+        updateStatusLabel(st.status || '');
+        if (st.flagged) {
+          body.appendChild(el('div', { class: 'flag-label' }, '\u26A0 Flagged \u2014 follow-up required'));
+        }
         const note = el('textarea', { placeholder: 'Notes / observations\u2026', rows: '1' });
         note.value = st.note || '';
         note.addEventListener('input', () => {
@@ -155,6 +192,20 @@ const CM = (() => {
         row.appendChild(body);
 
         const controls = el('div', { class: 'item-controls' });
+        const statusSelect = el('select', { class: 'status-select', title: 'Status' });
+        ['', 'Pass', 'Fail', 'N/A'].forEach(opt => {
+          statusSelect.appendChild(el('option', { value: opt }, opt || 'Status\u2026'));
+        });
+        statusSelect.value = st.status || '';
+        statusSelect.addEventListener('change', () => {
+          state.items = state.items || {};
+          const cur = state.items[item.id] || { checked: false, flagged: false, note: note.value, status: '' };
+          cur.status = statusSelect.value;
+          state.items[item.id] = cur;
+          saveState(key, state);
+          updateStatusLabel(cur.status);
+        });
+        controls.appendChild(statusSelect);
         const checkBtn = el('button', { class: 'check-toggle' + (st.checked ? ' on' : ''), title: 'Mark complete' }, st.checked ? '\u2713' : '');
         checkBtn.onclick = () => {
           state.items = state.items || {};
@@ -269,13 +320,17 @@ const CM = (() => {
     data.sections.forEach(s => {
       const flaggedOrNoted = s.items.filter(it => {
         const st = state.items && state.items[it.id];
-        return st && (st.flagged || (st.note && st.note.trim()));
+        return st && (st.flagged || st.status === 'Fail' || (st.note && st.note.trim()));
       });
       if (flaggedOrNoted.length) {
         lines.push('== ' + s.title + ' ==');
         flaggedOrNoted.forEach(it => {
           const st = state.items[it.id];
-          lines.push((st.flagged ? '[FLAGGED] ' : '') + it.id + ' ' + it.text);
+          const tags = [];
+          if (st.status === 'Fail') tags.push('FAIL');
+          if (st.flagged) tags.push('FLAGGED');
+          const prefix = tags.length ? '[' + tags.join('/') + '] ' : '';
+          lines.push(prefix + it.id + ' ' + it.text);
           if (st.note && st.note.trim()) lines.push('    Note: ' + st.note.trim());
         });
         lines.push('');
